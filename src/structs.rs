@@ -11,7 +11,7 @@ use bitcoin_hashes::sha256::Midstate;
 use bitcoin_hashes::sha256::HashEngine;
 use bitcoin_hashes::sha256t::Tag as TagTrait;
 
-const MIDSTATE: Midstate = Midstate::hash_tag(env!("CARGO_CRATE_NAME").as_bytes());
+const MIDSTATE: Midstate = Midstate::hash_tag(b"SIMPLE_CRYPTO");
 
 pub struct Tag {}
 impl TagTrait for Tag {
@@ -21,7 +21,7 @@ impl TagTrait for Tag {
 pub type BHash = HashT<Tag>;
 
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
 #[derive(serde_with::SerializeDisplay)]
 #[derive(serde_with::DeserializeFromStr)]
 pub struct Hash {
@@ -42,6 +42,12 @@ impl Hash {
 }
 
 impl std::fmt::Display for Hash {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", hex::encode(self.to_vec()))
+    }
+}
+
+impl std::fmt::Debug for Hash {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", hex::encode(self.to_vec()))
     }
