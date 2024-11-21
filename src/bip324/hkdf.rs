@@ -23,7 +23,6 @@ impl fmt::Display for MaxLengthError {
     }
 }
 
-#[cfg(feature = "std")]
 impl std::error::Error for MaxLengthError {}
 
 /// HMAC-based Extract-and-Expand Key Derivation Function (HKDF).

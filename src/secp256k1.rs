@@ -155,6 +155,10 @@ impl SecretKey {
         self.get_child(Derivation::from_hash(hash)?)
     }
 
+    pub fn derive_bytes(&self, bytes: &[u8]) -> Result<Self, Error> {
+        self.get_child(Derivation::from_bytes(bytes)?)
+    }
+
     pub fn get_child(&self, derivation_path: Vec<ChildNumber>) -> Result<Self, Error> {
         let x_priv = Xpriv::new_master(
             NetworkKind::Main,

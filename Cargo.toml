@@ -1,6 +1,6 @@
 [package]
 name = "simple-crypto"
-version = "1.0.2"
+version = "1.0.3"
 edition = "2021"
 description = "A rust crate for simple/secure Cryptograhic Primitves"
 license = "BSD-3-Clause"

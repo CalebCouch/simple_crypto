@@ -132,8 +132,6 @@ impl From<hkdf::MaxLengthError> for Error {
 /// All keys derived from the ECDH.
 #[derive(Clone)]
 pub struct SessionKeyMaterial {
-    /// A unique ID to identify a connection.
-    pub session_id: [u8; 32],
     initiator_length_key: [u8; 32],
     initiator_packet_key: [u8; 32],
     responder_length_key: [u8; 32],
@@ -400,7 +398,6 @@ impl Handshake {
         let responder_p_info = "responder_P".as_bytes();
         hk.expand(responder_p_info, &mut responder_packet_key)?;
         Ok(SessionKeyMaterial {
-            session_id,
             initiator_length_key,
             initiator_packet_key,
             responder_length_key,
